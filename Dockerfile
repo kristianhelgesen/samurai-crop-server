@@ -10,6 +10,7 @@ RUN apk-install ruby-json
 RUN gem install 'sinatra' --no-ri --no-rdoc -s 'http://rubygems.org'
 RUN gem install 'aws-s3' --no-ri --no-rdoc -s 'http://rubygems.org'
 RUN gem install 'uuid' --no-ri --no-rdoc -s 'http://rubygems.org'
+RUN gem install 'haml' --no-ri --no-rdoc -s 'http://rubygems.org'
 
 ENV RACK_ENV=production
 

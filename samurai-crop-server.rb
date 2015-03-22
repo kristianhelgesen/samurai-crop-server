@@ -3,6 +3,7 @@ require './transformparams.rb'
 
 require 'rubygems'
 require 'sinatra'
+require 'haml'
 require 'RMagick'
 require 'aws/s3'
 require 'tmpdir'
@@ -211,7 +212,6 @@ get '/crop/:imagename/:imagesize' do
 end
 
 get '/uploadForm' do
-  @bucket = params[:bucket]
   haml :upload
 end
 
