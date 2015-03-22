@@ -1,0 +1,4 @@
+S3-ACCESS-KEY=xxxxxxxxxxxxxxxxxxxx
+S3-SECRET-KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+S3-HOST=s3-eu-west-1.amazonaws.com
+S3-BUCKET=my-S3-bucket
