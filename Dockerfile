@@ -12,7 +12,7 @@ RUN gem install 'aws-s3' --no-ri --no-rdoc -s 'http://rubygems.org'
 RUN gem install 'uuid' --no-ri --no-rdoc -s 'http://rubygems.org'
 RUN gem install 'haml' --no-ri --no-rdoc -s 'http://rubygems.org'
 
-ENV RACK_ENV=production
+ENV RACK_ENV production
 
 EXPOSE 4567
 
@@ -23,6 +23,9 @@ ENV S3-SECRET-KEY <set-me>
 ENV S3-ACCESS-KEY <set-me>
 ENV S3-HOST <set-me>
 ENV S3-BUCKET <set-me>
+
+VOLUME /tmp
+VOLUME /data2
 
 CMD ruby samurai-crop-server.rb
 

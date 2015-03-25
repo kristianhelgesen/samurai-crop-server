@@ -101,7 +101,7 @@ get '/scale/:imagename/:imagesize' do
   
 end
 
-#i.e. http://localhost:4567/crop/imagename/100x100?cw:1.00&ch:0.99&dw:0.5&dy:123&a:0.0
+#i.e. http://localhost:4567/crop/imagename/100x100?cw=1.00&ch=0.99&dx=0.5&dy=123&a=0.0
 get '/crop/:imagename/:imagesize' do
   
   srcImgFileName = params[:imagename]
