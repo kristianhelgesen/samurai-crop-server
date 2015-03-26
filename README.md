@@ -16,12 +16,13 @@ Go to http://localhost:4567/uploadForm to upload a file.
 
 
 Parameters:
-
-* cw : fraction of width to keep (0.0 - 1.0)
-* ch : fraction of height to keep (0.0 - 1.0)
-* dx : translate center of crop rectangle horizontaly relative to centre of image (-0.5 - 0.5)
-* dy : same as dx, only in vertical direction
-* a  : rotate crop rectangle (+/- 45 degrees)
+| Name          | Description   | Range  |
+| ------------- | ------------- | ------ |
+| cw            | width of crop rectangle relative to image width   | 0.0 - 1.0 |
+| ch            | height of crop rectangle relative to image height | 0.0 - 1.0 |
+| dx            | translate center of crop rectangle horizontaly relative to centre of image | -0.5 - 0.5|
+| dy            | same as dx, only in vertical direction | -0.5 - 0.5 |
+| a             | rotation of crop rectangle | +/- 45 degrees |
 
 
 ```
