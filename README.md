@@ -16,6 +16,7 @@ Go to http://localhost:4567/uploadForm to upload a file.
 
 
 Parameters:
+
 | Name          | Description   | Range  |
 | ------------- | ------------- | ------ |
 | cw            | width of crop rectangle relative to image width   | 0.0 - 1.0 |
