@@ -16,16 +16,15 @@ ENV RACK_ENV production
 
 EXPOSE 4567
 
-ADD . /data
-WORKDIR /data
+ADD . /app
+WORKDIR /app
 
 ENV S3-SECRET-KEY <set-me>
 ENV S3-ACCESS-KEY <set-me>
 ENV S3-HOST <set-me>
 ENV S3-BUCKET <set-me>
 
-VOLUME /tmp
-VOLUME /data2
+VOLUME /data
 
 CMD ruby samurai-crop-server.rb
 
