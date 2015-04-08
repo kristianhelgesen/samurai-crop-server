@@ -1,5 +1,6 @@
 class DataFile
     
+    
 	def save( tmpfile, name)
 		AWS::S3::S3Object.store( 'img/originals/' << name, tmpfile, @bucket)
 	end
@@ -14,6 +15,11 @@ class DataFile
   
 	def load(name)
 		picture = AWS::S3::S3Object.value('img/originals/' << name, @bucket)
+		
+		#aFile = File.new( workFileName, "w")
+		#aFile.write( srcImgFile)
+		#aFile.close
+		
 		return picture
 	end
   
@@ -33,6 +39,8 @@ class DataFile
 			:access_key_id     => ENV['S3-ACCESS-KEY'],
 			:secret_access_key => ENV['S3-SECRET-KEY']
 		)
+		AWS::S3::DEFAULT_HOST.replace(ENV['S3-HOST'])		
+		
 	end    
   
 end

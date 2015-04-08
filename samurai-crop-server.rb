@@ -13,12 +13,6 @@ require 'digest/sha1'
 require 'fileutils'
 
 
-module AWS
-	module S3
-		DEFAULT_HOST = ENV['S3-HOST']
-	end
-end
-
 
 get '/status' do
 	df = DataFile.new()
