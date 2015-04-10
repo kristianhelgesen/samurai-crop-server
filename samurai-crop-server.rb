@@ -1,4 +1,5 @@
-require './datafile.rb'
+require './datafile-s3.rb'
+require './datafile-local.rb'
 require './transformparams.rb'
 
 require 'rubygems'
@@ -13,9 +14,14 @@ require 'digest/sha1'
 require 'fileutils'
 
 
+if ENV.has_key?('S3-BUCKET')
+	df = DataFileS3.new()
+else
+
+end
+
 
 get '/status' do
-	df = DataFile.new()
 	df.save('status OK','status.txt');
 	"OK"
 end
@@ -31,7 +37,6 @@ get '/scale/:imagename/:imagesize' do
 	imagesize = params[:imagesize]
 	t = TransformParams.new( params)
   
-	df = DataFile.new()
 
 	srcImgFile = df.load( srcImgFileName)
   
@@ -99,8 +104,6 @@ get '/crop/:imagename/:imagesize' do
 	imagesize = params[:imagesize]
 	t = TransformParams.new( params)
   
-	df = DataFile.new()
-
 	resultW = imagesize.split("x")[0].to_i
 	resultH = imagesize.split("x")[1].to_i
 
@@ -208,7 +211,6 @@ end
 
 
 post '/uploadForm' do
-	df = DataFile.new()
  
 	unless params[:file] && (tmpfile = params[:file][:tempfile]) && (name = params[:file][:filename])
 		status 400

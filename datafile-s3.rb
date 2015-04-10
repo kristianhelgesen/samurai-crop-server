@@ -1,4 +1,4 @@
-class DataFile
+class DataFileS3
     
     
 	def save( tmpfile, name)
