@@ -19,10 +19,10 @@ EXPOSE 4567
 ADD . /app
 WORKDIR /app
 
-ENV S3-SECRET-KEY <set-me>
-ENV S3-ACCESS-KEY <set-me>
-ENV S3-HOST <set-me>
-ENV S3-BUCKET <set-me>
+# ENV S3-SECRET-KEY <set-me>
+# ENV S3-ACCESS-KEY <set-me>
+# ENV S3-HOST <set-me>
+# ENV S3-BUCKET <set-me>
 
 VOLUME /data
 

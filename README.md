@@ -33,8 +33,17 @@ curl http://docker:4567/crop/image1.jpg/407x408?cw=1.00&ch=0.99&dx=0.5&dy=123&a=
 
 
 
-# Configuration
+# In container persistence
+```
+docker run -d -p 4567:4567 --name samurai k14n/samurai-crop-server
+```
 
+
+
+# Amazon s3
+```
+docker run -d -p 4567:4567 --name samurai --env-file=dockerenv.txt  k14n/samurai-crop-server
+```
 Environment variables:
 
 * S3-ACCESS-KEY
@@ -51,12 +60,6 @@ cp dockerenv-example.txt dockerenv.txt
 Use your favorite editor to enter your own environment values.
 
 
-# Run
-```
-docker run -d -p 4567:4567 --name samurai --env-file=dockerenv.txt  k14n/samurai-crop-server
-```
-
-
 
 
 
@@ -65,4 +68,15 @@ docker run -d -p 4567:4567 --name samurai --env-file=dockerenv.txt  k14n/samurai
 ```
 docker build -t k14n/samurai-crop-server .
 ```
+
+
+# Develop
+```
+$ git clone https://github.com/kristianhelgesen/samurai-crop-server.git
+$ cd samurai-crop-server
+$ docker run -it -p 4567:4567 --name samurai -$(pwd):/app  k14n/samurai-crop-server
+/app # ruby samurai-crop-server.rb
+```
+
+
 

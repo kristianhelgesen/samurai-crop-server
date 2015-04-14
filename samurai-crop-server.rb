@@ -14,15 +14,17 @@ require 'digest/sha1'
 require 'fileutils'
 
 
-if ENV.has_key?('S3-BUCKET')
-	df = DataFileS3.new()
-else
-
-end
+#if ENV.has_key?('S3-BUCKET')
+#	df = DataFileS3.new()
+#else
+	df = DataFileLocal.new()
+#end
 
 
 get '/status' do
-	df.save('status OK','status.txt');
+	if ENV.has_key?('S3-BUCKET')
+		df.save('status OK','status.txt')
+	end
 	"OK"
 end
 
@@ -39,7 +41,7 @@ get '/scale/:imagename/:imagesize' do
   
 
 	srcImgFile = df.load( srcImgFileName)
-  
+	  
 	resultW = imagesize.split("x")[0].to_i
 	resultH = imagesize.split("x")[1].to_i
 
@@ -73,10 +75,7 @@ get '/scale/:imagename/:imagesize' do
 	workFileName =  File.join( workFolder, srcImgFileName)
 
 	Dir.mkdir( workFolder);
-	aFile = File.new( workFileName, "w")
-	aFile.write( srcImgFile)
-	aFile.close
-  
+	srcImgFile.write workFileName
 	srcImg = Magick::Image.read( workFileName).first
 
 	resultW = (srcImg.columns*resultH)/srcImg.rows if resultW<=0
@@ -147,12 +146,8 @@ get '/crop/:imagename/:imagesize' do
 	workFolder = File.join( Dir.tmpdir, randomFileNamePart)
 	workFileName =  File.join( workFolder, srcImgFileName)
 
-	Dir.mkdir( workFolder);
-  
-	aFile = File.new( workFileName, "w")
-	aFile.write( srcImgFile)
-	aFile.close
-
+	Dir.mkdir workFolder
+  	srcImgFile.write workFileName
 	srcImg = Magick::Image.read( workFileName).first
 
 	srcW = Float( srcImg.columns)
@@ -171,8 +166,8 @@ get '/crop/:imagename/:imagesize' do
 	#puts "cropparams: #{preCropX}, #{preCropY}, #{preCropW}, #{preCropH}"
   
 	workFileName[".jpg"] = "-after-pre-crop.jpg"
-	srcImg.write( workFileName);
-	srcImg = Magick::Image.read( workFileName).first;
+	srcImg.write workFileName
+	srcImg = Magick::Image.read( workFileName).first
   
 	srcImg.rotate!( t.a*180.0/Math::PI)
   
@@ -182,7 +177,7 @@ get '/crop/:imagename/:imagesize' do
 	srcImg.crop!( rotateOffsetX, rotateOffsetY, srcW*t.cw, srcH*t.ch)
   
 	workFileName["-after-pre-crop.jpg"] = "-after-all.jpg"
-	srcImg.write( workFileName)
+	srcImg.write workFileName
 	srcImg = Magick::Image.read( workFileName).first;  
   
 	resultW = resultH*srcW*t.cw/(srcH*t.ch) if resultW<=0  
@@ -192,12 +187,12 @@ get '/crop/:imagename/:imagesize' do
 	srcImg.resize_to_fill!( resultW, resultH, Magick::CenterGravity)
   
 	workFileName["-after-all.jpg"] = "-final.jpg"
-	srcImg.write( workFileName)
+	srcImg.write workFileName
   
 	df.saveCrop( open(workFileName), resultImageName)
 	puts "image done: #{workFileName} in folder #{workFolder}"
   
-	FileUtils.rm_rf(workFolder)  
+#	FileUtils.rm_rf(workFolder)  
   
 	status 201
 	content_type :json
