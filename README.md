@@ -47,10 +47,10 @@ docker run -d -p 4567:4567 --name samurai --env-file=dockerenv.txt  k14n/samurai
 Environment variables (dockerenv.txt:
 
 ```
-S3-ACCESS-KEY=xxxxxxxxxxx
-S3-SECRET-KEY=xxxxxxxxxxx
-S3-HOST=
-S3-BUCKET=mybucket
+S3-ACCESS-KEY=xxxxxxxxxxxxxxxxxxxx
+S3-SECRET-KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+S3-HOST=s3-eu-west-1.amazonaws.com
+S3-BUCKET=my-S3-bucket
 ```
 
 
