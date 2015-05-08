@@ -5,15 +5,18 @@ Server for uploading, cropping and rotating images.
 
 
 
-# Uploading images
+## Uploading images
 
 Go to http://localhost:4567/uploadForm to upload a file.
 
 
 
+## Cropping images
 
-# Cropping images
-
+Example:
+```
+curl http://docker:4567/crop/image1.jpg/407x408?cw=1.00&ch=0.99&dx=0.5&dy=123&a=0.2
+```
 
 Parameters:
 
@@ -26,25 +29,29 @@ Parameters:
 | a             | rotation of crop rectangle | +/- 45 degrees |
 
 
+## Scaling images
+
+Example:
 ```
-curl http://docker:4567/crop/image1.jpg/407x408?cw=1.00&ch=0.99&dx=0.5&dy=123&a=0.2
+curl http://docker:4567/scale/image1.jpg/600x400
 ```
 
 
 
+# Running
 
-# In container persistence
+## In container persistence
 ```
 docker run -d -p 4567:4567 --name samurai k14n/samurai-crop-server
 ```
 
 
 
-# Amazon s3
+## Amazon s3
 ```
 docker run -d -p 4567:4567 --name samurai --env-file=dockerenv.txt  k14n/samurai-crop-server
 ```
-Environment variables (dockerenv.txt:
+Environment variables (dockerenv.txt):
 
 ```
 S3-ACCESS-KEY=xxxxxxxxxxxxxxxxxxxx
@@ -67,7 +74,7 @@ docker build -t k14n/samurai-crop-server .
 ```
 
 
-# Develop
+# Development
 ```
 $ git clone https://github.com/kristianhelgesen/samurai-crop-server.git
 $ cd samurai-crop-server
