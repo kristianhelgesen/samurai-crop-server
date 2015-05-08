@@ -44,16 +44,13 @@ docker run -d -p 4567:4567 --name samurai k14n/samurai-crop-server
 ```
 docker run -d -p 4567:4567 --name samurai --env-file=dockerenv.txt  k14n/samurai-crop-server
 ```
-Environment variables:
-
-* S3-ACCESS-KEY
-* S3-SECRET-KEY
-* S3-HOST
-* S3-BUCKET
-
+Environment variables (dockerenv.txt:
 
 ```
-cp dockerenv-example.txt dockerenv.txt
+S3-ACCESS-KEY=xxxxxxxxxxx
+S3-SECRET-KEY=xxxxxxxxxxx
+S3-HOST=
+S3-BUCKET=mybucket
 ```
 
 
