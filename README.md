@@ -1,7 +1,7 @@
 # samurai-crop-server
 
 
-Server for uploading, cropping and rotating images. 
+Server for uploading, server side cropping and rotating images. To define the crop rectangle client side, use http://croputils.sourceforge.net/
 
 
 
